@@ -15,7 +15,7 @@ exports.postProduct =async(req,res)=>{
         await newProduct.save();
         res.status(201).json(newProduct);
     } catch (error) {
-         console.error(error);        
+         console.error(error);    
         res.status(500).json({error: 'server error'});
     }
 

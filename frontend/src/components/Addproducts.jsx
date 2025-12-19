@@ -7,6 +7,7 @@ export default function AddProducts() {
     price: "",
     image: "",
     description: "",
+    category: "", // ADD HERE: Category field
   });
 
   const handleChange = (e) => {
@@ -20,6 +21,7 @@ export default function AddProducts() {
       price: form.price,
       img: form.image,
       description: form.description,
+      category: form.category, // ADD HERE: Include category
     };
 
     try {
@@ -38,6 +40,7 @@ export default function AddProducts() {
           price: "",
           image: "",
           description: "",
+          category: "", // ADD HERE: Reset category
         });
       } else {
         alert("Failed to add product");
@@ -100,6 +103,20 @@ export default function AddProducts() {
             value={form.image}
             onChange={handleChange}
             required
+          />
+        </div>
+
+        <div className="form-field">
+          <label htmlFor="category" className="form-label">
+            Category
+          </label>
+          <input
+            id="category"
+            name="category"
+            type="text"
+            placeholder="e.g. Electronics, Kitchen, Fashion"
+            value={form.category}
+            onChange={handleChange}
           />
         </div>
 

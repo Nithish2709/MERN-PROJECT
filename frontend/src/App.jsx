@@ -28,7 +28,7 @@ function App() {
   };
 
   return (
-    
+   
       <div className="app-root">
         <header className="app-header">
           <div className="header-inner">
@@ -75,7 +75,7 @@ function App() {
         <main className="app-main">
           <div className="app-main-inner">
             <Routes>
-              <Route path="/" element={<Home />}>
+              <Route path="/" element={<Home cart={cart} setcart={setcart} />}>
                 Home
               </Route>
               <Route path="/about" element={<About />}>
@@ -122,7 +122,7 @@ function App() {
           </div>
         </footer>
       </div>
-
+   
   );
 }
 

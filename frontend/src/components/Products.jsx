@@ -4,12 +4,24 @@ import { API } from "../utils/api";
 
 export default function Products({ setcart, cart }) {
   const [products, setproducts] = useState([]);
+  // ADD HERE: State for search and category
+  const [search, setSearch] = useState('');
+  const [category, setCategory] = useState('');
 
-  useEffect(() => {
-    fetch(`${API}/api/Product`)
+  // ADD HERE: Function to fetch products with filters
+  const fetchProducts = () => {
+    const params = new URLSearchParams();
+    if (search) params.append('search', search);
+    if (category) params.append('category', category);
+    
+    fetch(`${API}/api/Product?${params}`)
       .then((res) => res.json())
       .then((data) => setproducts(data));
-  }, []);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, [search, category]); // ADD HERE: Re-fetch when search or category changes
 
   const addTocart = (product) => {
     const item = {
@@ -57,6 +69,34 @@ export default function Products({ setcart, cart }) {
           Total products: <span>{products.length}</span>
         </p>
       </header>
+
+      {/* ADD HERE: Search and Filter Controls */}
+      <div className="products-filters" style={{marginBottom: '20px', display: 'flex', gap: '15px', flexWrap: 'wrap'}}>
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="form-input"
+          style={{minWidth: '200px', flex: '1'}}
+        />
+        <input
+          type="text"
+          placeholder="Enter category (e.g. Electronics, Kitchen)"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="form-input"
+          style={{minWidth: '200px', flex: '1'}}
+        />
+        {(search || category) && (
+          <button
+            onClick={() => {setSearch(''); setCategory('');}}
+            className="btn btn-outline"
+          >
+            Clear Filters
+          </button>
+        )}
+      </div>
 
       {products.length === 0 ? (
         <div className="products-empty">

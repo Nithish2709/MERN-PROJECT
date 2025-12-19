@@ -618,7 +618,26 @@ body {
 .home-page {
   min-height: 50vh;
   display: flex;
-  align-items: stretch;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.home-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.home-filters {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.home-filters .form-input {
+  flex: 1;
+  min-width: 200px;
 }
 
 .home-hero {
